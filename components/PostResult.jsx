@@ -1,5 +1,4 @@
 'use client'
-
 import { useState } from 'react'
 
 export default function PostResult({ post }) {
@@ -12,21 +11,21 @@ export default function PostResult({ post }) {
   }
 
   return (
-    <div className="bg-white rounded-lg shadow p-6">
-      <div className="flex justify-between items-center mb-4">
-        <h2 className="text-lg font-medium text-gray-900">Your LinkedIn Post</h2>
+    <div className="bg-white rounded-lg shadow overflow-hidden">
+      <div className="p-4 border-b border-gray-200 bg-gray-50 flex justify-between items-center">
+        <h3 className="text-lg font-medium text-gray-900">Generated Post</h3>
         <button
           onClick={copyToClipboard}
-          className="inline-flex items-center px-3 py-1 border border-transparent text-xs font-medium rounded shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+          className="inline-flex items-center px-3 py-1.5 border border-transparent text-xs font-medium rounded shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
         >
-          {isCopied ? 'Copied!' : 'Copy to Clipboard'}
+          {isCopied ? '✓ Copied' : 'Copy to Clipboard'}
         </button>
       </div>
-      <div className="prose max-w-none whitespace-pre-line p-4 bg-gray-50 rounded">
+      <div className="p-4 prose max-w-none whitespace-pre-line">
         {post}
       </div>
-      <div className="mt-4 text-sm text-gray-500">
-        <p>Character count: {post.length}/1500</p>
+      <div className="px-4 py-3 bg-gray-50 text-right text-sm text-gray-500 border-t border-gray-200">
+        {post.length} characters
       </div>
     </div>
   )

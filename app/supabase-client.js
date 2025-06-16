@@ -1,17 +1,27 @@
 'use client'
-
 import { createBrowserClient } from '@supabase/ssr'
 import { createContext, useContext, useEffect, useState } from 'react'
 
 export const SupabaseContext = createContext(null)
 
 export function SupabaseProvider({ children }) {
-  const [supabase] = useState(() => 
-    createBrowserClient(
+  const [supabase] = useState(() => {
+    if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) {
+      throw new Error('Supabase URL and Anon Key must be defined')
+    }
+    
+    return createBrowserClient(
       process.env.NEXT_PUBLIC_SUPABASE_URL,
-      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
+      {
+        auth: {
+          persistSession: false,
+          autoRefreshToken: false
+        }
+      }
     )
-  )
+  })
+  
   const [session, setSession] = useState(null)
 
   useEffect(() => {
