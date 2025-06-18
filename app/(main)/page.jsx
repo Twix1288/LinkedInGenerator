@@ -4,7 +4,6 @@ import Image from 'next/image'
 export default function Home() {
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Hero Section */}
       <section className="py-20 px-4 max-w-6xl mx-auto text-center">
         <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
           Craft Perfect LinkedIn Posts in Seconds
@@ -20,7 +19,6 @@ export default function Home() {
         </Link>
       </section>
 
-      {/* Features Section */}
       <section className="py-16 bg-white">
         <div className="max-w-6xl mx-auto px-4">
           <h2 className="text-3xl font-bold text-center mb-12">How It Works</h2>
@@ -44,7 +42,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* CTA Section */}
       <section className="py-20 px-4 text-center">
         <h2 className="text-3xl font-bold mb-6">Ready to Elevate Your LinkedIn Game?</h2>
         <Link 

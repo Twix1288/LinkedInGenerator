@@ -14,7 +14,6 @@ export async function POST(request) {
   try {
     const { text, tone = 'professional', clientId, linkUrl = '' } = await request.json()
 
-    // First check the limit
     const limitCheck = await fetch('http://localhost:3000/api/check-limit', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -55,7 +54,6 @@ export async function POST(request) {
 
     const post = completion.choices[0].message.content
 
-    // Save to Supabase
     const { error } = await supabase
       .from('generations')
       .insert({

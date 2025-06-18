@@ -26,7 +26,6 @@ export default function GenerationForm({ onSubmit, isGenerating, remainingGenera
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
-      {/* Generation Counter */}
       <div className="text-center p-2 bg-blue-50 rounded-md">
         <p className="text-sm font-medium text-blue-800">
           Generations remaining: <span className="font-bold">{remainingGenerations}/3</span>

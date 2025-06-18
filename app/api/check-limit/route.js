@@ -1,12 +1,9 @@
 import { createClient } from '@supabase/supabase-js'
-
-// Initialize Supabase client with explicit realtime-js config
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL,
   process.env.SUPABASE_SERVICE_ROLE_KEY,
   {
     realtime: {
-      // Disable realtime functionality since we're not using it
       disable: true
     },
     auth: {
@@ -20,7 +17,6 @@ export async function POST(request) {
   const { clientId } = await request.json()
   
   try {
-    // Count today's generations for this client
     const { count, error } = await supabase
       .from('generations')
       .select('*', { count: 'exact' })
