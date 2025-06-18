@@ -8,17 +8,32 @@ export default function GeneratePage() {
   const [isGenerating, setIsGenerating] = useState(false)
   const [error, setError] = useState(null)
   const [clientId, setClientId] = useState('')
+  const [remainingGenerations, setRemainingGenerations] = useState(3)
 
   useEffect(() => {
     const id = localStorage.getItem('clientId') || crypto.randomUUID()
     localStorage.setItem('clientId', id)
     setClientId(id)
+    checkGenerationsLimit(id)
   }, [])
+
+  const checkGenerationsLimit = async (id) => {
+    try {
+      const response = await fetch('/api/check-limit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ clientId: id })
+      })
+      const data = await response.json()
+      setRemainingGenerations(data.remaining)
+    } catch (err) {
+      console.error('Failed to check limit:', err)
+    }
+  }
 
   const handleGenerate = async (formData) => {
     setIsGenerating(true)
     setError(null)
-    setResult(null)
     
     try {
       const response = await fetch('/api/generate', {
@@ -32,21 +47,15 @@ export default function GeneratePage() {
 
       const data = await response.json()
       
-      if (!response.ok) {
-        throw new Error(
-          data.error || 
-          data.details || 
-          'API request failed'
-        )
-      }
+      if (!response.ok) throw new Error(data.error || 'API request failed')
 
-      setResult(data.post)
+      setResult(data)
+      setRemainingGenerations(prev => Math.max(0, prev - 1))
+      
     } catch (err) {
       setError({
         title: err.message,
-        details: err.message.includes('quota') 
-          ? 'Please add OpenAI credits to your account' 
-          : 'Please try again later'
+        details: 'Please try again later'
       })
     } finally {
       setIsGenerating(false)
@@ -75,11 +84,12 @@ export default function GeneratePage() {
           
           <GenerationForm 
             onSubmit={handleGenerate} 
-            isGenerating={isGenerating} 
+            isGenerating={isGenerating}
+            remainingGenerations={remainingGenerations}
           />
         </div>
 
-        {result && <PostResult post={result} />}
+        {result && <PostResult post={result.post} metadata={result.metadata} />}
       </div>
     </div>
   )

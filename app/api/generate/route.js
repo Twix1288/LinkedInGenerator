@@ -12,9 +12,23 @@ const openai = new OpenAI({
 
 export async function POST(request) {
   try {
-    const { text, tone = 'professional', clientId, imageUrl = '', linkUrl = '' } = await request.json()
+    const { text, tone = 'professional', clientId, linkUrl = '' } = await request.json()
 
-    // Validate inputs
+    // First check the limit
+    const limitCheck = await fetch('http://localhost:3000/api/check-limit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ clientId })
+    })
+    const { remaining } = await limitCheck.json()
+    
+    if (remaining <= 0) {
+      return Response.json(
+        { error: 'You have reached your daily generation limit (3 posts)' },
+        { status: 429 }
+      )
+    }
+
     if (!text?.trim()) {
       return Response.json(
         { error: 'Please provide some content' },
@@ -22,17 +36,15 @@ export async function POST(request) {
       )
     }
 
-    // Enhanced prompt with image/link handling
-    const prompt = `Create a LinkedIn post with ${tone} tone. Follow this structure:
+    const prompt = `Create a LinkedIn post with ${tone} tone. Structure:
     - Engaging introduction
     - 2-3 concise paragraphs with key points
     - Call-to-action question
     - 3-5 relevant hashtags
-    ${imageUrl ? '\nNote: Include a natural reference to an accompanying image.' : ''}
     ${linkUrl ? `\nInclude a call-to-action linking to: ${linkUrl}` : ''}`
 
     const completion = await openai.chat.completions.create({
-      model: "gpt-3.5-turbo",
+      model: "gpt-4o-mini",
       messages: [
         { role: "system", content: prompt },
         { role: "user", content: text }
@@ -43,7 +55,7 @@ export async function POST(request) {
 
     const post = completion.choices[0].message.content
 
-    // Save to Supabase with all fields
+    // Save to Supabase
     const { error } = await supabase
       .from('generations')
       .insert({
@@ -51,7 +63,6 @@ export async function POST(request) {
         input_text: text,
         tone,
         output_text: post,
-        image_url: imageUrl,
         link_url: linkUrl,
         created_at: new Date().toISOString()
       })
@@ -60,10 +71,7 @@ export async function POST(request) {
 
     return Response.json({ 
       post,
-      metadata: {
-        imageUrl,
-        linkUrl
-      }
+      metadata: { linkUrl }
     })
 
   } catch (error) {

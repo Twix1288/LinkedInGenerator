@@ -25,15 +25,6 @@ export default function PostResult({ post, metadata }) {
         {post}
       </div>
       
-      {/* Image URL section */}
-      {metadata?.imageUrl && (
-        <div className="px-4 py-3 border-t border-gray-200 bg-gray-50">
-          <h4 className="text-sm font-medium text-gray-700 mb-1">Image Reference</h4>
-          <p className="text-sm text-gray-600 break-all">{metadata.imageUrl}</p>
-        </div>
-      )}
-      
-      {/* Link URL section */}
       {metadata?.linkUrl && (
         <div className="px-4 py-3 border-t border-gray-200 bg-gray-50">
           <h4 className="text-sm font-medium text-gray-700 mb-1">Included Link</h4>
