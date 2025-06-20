@@ -2,6 +2,7 @@ import './globals.css'
 import { Inter } from 'next/font/google'
 import Link from 'next/link'
 import { SupabaseProvider } from './supabase-client'
+import Script from 'next/script'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -13,6 +14,11 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
+      <head>
+        {/* Google AdSense Auto Ads Script */}
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3182066441920648"
+     crossorigin="anonymous"></script>
+      </head>
       <body className={inter.className}>
         <SupabaseProvider>
           <div className="min-h-screen bg-gray-50">
@@ -39,6 +45,7 @@ export default function RootLayout({ children }) {
               </div>
             </nav>
             <main className="max-w-6xl mx-auto px-4 py-8">
+              {/* AdSense Auto Ads will automatically place ads here */}
               {children}
             </main>
           </div>
