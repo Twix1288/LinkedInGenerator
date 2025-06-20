@@ -25,7 +25,6 @@ const openai = new OpenAI({
 
 export async function POST(request) {
   try {
-    // Parse incoming JSON body safely
     let body
     try {
       body = await request.json()
@@ -45,7 +44,6 @@ export async function POST(request) {
       )
     }
 
-    // Check daily generation limit
     const limitCheck = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/check-limit`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -54,10 +52,10 @@ export async function POST(request) {
 
     if (!limitCheck.ok) {
       const errorText = await limitCheck.text()
-      console.error('Limit check failed:', errorText)
+      console.error('Limit check failed with status', limitCheck.status, 'and body:', errorText || '(empty response body)')
 
       return Response.json(
-        { error: 'Failed to check usage limit' },
+        { error: 'Failed to check usage limit', details: `Status: ${limitCheck.status}, Body: ${errorText || 'empty'}` },
         { status: 500 }
       )
     }
