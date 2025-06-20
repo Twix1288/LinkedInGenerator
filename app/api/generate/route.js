@@ -14,7 +14,7 @@ export async function POST(request) {
   try {
     const { text, tone = 'professional', clientId, linkUrl = '' } = await request.json()
 
-    const limitCheck = await fetch('http://localhost:3000/api/check-limit', {
+    const limitCheck = await fetch(`${request.headers.get('origin') || 'http://localhost:3000'}/api/check-limit`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ clientId })
