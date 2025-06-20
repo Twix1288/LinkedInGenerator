@@ -10,13 +10,14 @@ if (!process.env.SUPABASE_SERVICE_ROLE_KEY) {
 if (!process.env.OPENAI_API_KEY) {
   throw new Error('Missing OPENAI_API_KEY env variable')
 }
-if (!process.env.NEXT_PUBLIC_SITE_URL) {
-  throw new Error('Missing NEXT_PUBLIC_SITE_URL env variable')
-}
 
 const supabase = createClient(
   process.env.SUPABASE_URL,
-  process.env.SUPABASE_SERVICE_ROLE_KEY
+  process.env.SUPABASE_SERVICE_ROLE_KEY,
+  {
+    realtime: { disable: true },
+    auth: { persistSession: false }
+  }
 )
 
 const openai = new OpenAI({
@@ -25,17 +26,7 @@ const openai = new OpenAI({
 
 export async function POST(request) {
   try {
-    let body
-    try {
-      body = await request.json()
-    } catch {
-      return Response.json(
-        { error: 'Invalid or missing JSON in request body' },
-        { status: 400 }
-      )
-    }
-
-    const { text, tone = 'professional', clientId, linkUrl = '' } = body
+    const { text, tone = 'professional', clientId, linkUrl = '' } = await request.json()
 
     if (!clientId) {
       return Response.json(
@@ -44,28 +35,27 @@ export async function POST(request) {
       )
     }
 
-    const limitCheck = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/check-limit`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ clientId })
-    })
+    const MAX_DAILY_GENERATIONS = 3
+    const todayISO = new Date().toISOString().split('T')[0]
 
-    if (!limitCheck.ok) {
-      const errorText = await limitCheck.text()
-      console.error('Limit check failed with status', limitCheck.status, 'and body:', errorText || '(empty response body)')
+    // Check generation count directly from Supabase
+    const { count, error: countError } = await supabase
+      .from('generations')
+      .select('*', { count: 'exact' })
+      .eq('client_id', clientId)
+      .gte('created_at', todayISO)
 
+    if (countError) {
+      console.error('Supabase error checking limit:', countError)
       return Response.json(
-        { error: 'Failed to check usage limit', details: `Status: ${limitCheck.status}, Body: ${errorText || 'empty'}` },
+        { error: 'Failed to check usage limit' },
         { status: 500 }
       )
     }
 
-    const limitData = await limitCheck.json()
-    const remaining = limitData.remaining ?? 0
-
-    if (remaining <= 0) {
+    if ((count || 0) >= MAX_DAILY_GENERATIONS) {
       return Response.json(
-        { error: 'You have reached your daily generation limit (3 posts)' },
+        { error: `You have reached your daily generation limit (${MAX_DAILY_GENERATIONS} posts)` },
         { status: 429 }
       )
     }
@@ -96,7 +86,7 @@ ${linkUrl ? `\nInclude a call-to-action linking to: ${linkUrl}` : ''}`
 
     const post = completion.choices[0].message.content
 
-    const { error } = await supabase
+    const { error: insertError } = await supabase
       .from('generations')
       .insert({
         client_id: clientId,
@@ -107,7 +97,13 @@ ${linkUrl ? `\nInclude a call-to-action linking to: ${linkUrl}` : ''}`
         created_at: new Date().toISOString()
       })
 
-    if (error) throw error
+    if (insertError) {
+      console.error('Supabase insert error:', insertError)
+      return Response.json(
+        { error: 'Failed to save generation' },
+        { status: 500 }
+      )
+    }
 
     return Response.json({
       post,
@@ -115,8 +111,7 @@ ${linkUrl ? `\nInclude a call-to-action linking to: ${linkUrl}` : ''}`
     })
 
   } catch (error) {
-    console.error('Generation Error:', error)
-
+    console.error('Generation error:', error)
     return Response.json(
       {
         error: 'Failed to generate post',
