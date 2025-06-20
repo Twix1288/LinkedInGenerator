@@ -11,7 +11,7 @@ export function SupabaseProvider({ children }) {
     }
     
     return createBrowserClient(
-      process.env.NEXT_PUBLIC_SUPABASE_URLL,
+      process.env.NEXT_PUBLIC_SUPABASE_URL,
       process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
       {
         auth: {
