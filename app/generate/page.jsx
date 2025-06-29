@@ -63,7 +63,7 @@ export default function GeneratePage() {
   }
 
   return (
-    <div className="max-w-4xl mx-auto px-4 py-8 min-h-[calc(100vh-160px)]">
+    <div className="w-full max-w-3xl mx-auto px-4 py-8 min-h-[calc(100vh-160px)]">
       <h1 className="text-3xl font-bold text-gray-900 mb-8 text-center">LinkedIn Post Generator</h1>
       
       <div className="space-y-8 w-full">
