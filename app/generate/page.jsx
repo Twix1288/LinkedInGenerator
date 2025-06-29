@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react'
 import GenerationForm from '../../components/GenerationForm'
 import PostResult from '../../components/PostResult'
+import Script from 'next/script'
 
 export default function GeneratePage() {
   const [result, setResult] = useState(null)
@@ -63,8 +64,31 @@ export default function GeneratePage() {
   }
 
   return (
-    
     <div className="w-full max-w-3xl mx-auto px-4 py-8 min-h-[calc(100vh-160px)]">
+      {/* AdSense Ad Unit - Placed at the top of the content */}
+      <div className="mb-8 text-center">
+        <Script
+          id="adsbygoogle-ad"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+              (adsbygoogle = window.adsbygoogle || []).push({
+                google_ad_client: "ca-pub-3182066441920648",
+                enable_page_level_ads: true
+              });
+            `
+          }}
+        />
+        <ins 
+          className="adsbygoogle"
+          style={{ display: 'block' }}
+          data-ad-client="ca-pub-3182066441920648"
+          data-ad-slot="5702324134"
+          data-ad-format="auto"
+          data-full-width-responsive="true"
+        />
+      </div>
+
       <h1 className="text-3xl font-bold text-gray-900 mb-8 text-center">LinkedIn Post Generator</h1>
       
       <div className="space-y-8 w-full">

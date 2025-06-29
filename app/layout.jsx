@@ -15,11 +15,15 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
-  {/* Use Next.js Script component instead of native script tag */}
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3182066441920648"
-     crossorigin="anonymous"></script>
-  <meta name="google-adsense-account" content="ca-pub-3182066441920648"/>
-</head>
+        {/* Google AdSense Script */}
+        <Script
+          id="adsbygoogle-init"
+          strategy="afterInteractive"
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3182066441920648"
+          crossOrigin="anonymous"
+        />
+        <meta name="google-adsense-account" content="ca-pub-3182066441920648"/>
+      </head>
       <body className={inter.className}>
         <SupabaseProvider>
           <div className="min-h-screen bg-gray-50">
@@ -54,6 +58,28 @@ export default function RootLayout({ children }) {
             <main className="max-w-6xl mx-auto px-4 py-8">
               {children}
             </main>
+            
+            {/* AdSense Ad Unit - Place where you want ads to appear */}
+            <div className="max-w-6xl mx-auto px-4 py-8 text-center">
+              <Script
+                id="adsbygoogle-ad"
+                strategy="afterInteractive"
+                dangerouslySetInnerHTML={{
+                  __html: `
+                    (adsbygoogle = window.adsbygoogle || []).push({
+                      google_ad_client: "ca-pub-3182066441920648",
+                      enable_page_level_ads: true
+                    });
+                  `
+                }}
+              />
+              <ins className="adsbygoogle"
+                style={{ display: 'block' }}
+                data-ad-client="ca-pub-3182066441920648"
+                data-ad-slot="5702324134"
+                data-ad-format="auto"
+                data-full-width-responsive="true"></ins>
+            </div>
           </div>
         </SupabaseProvider>
       </body>
