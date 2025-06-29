@@ -58,10 +58,8 @@ export default function RootLayout({ children }) {
             <main className="max-w-6xl mx-auto px-4 py-8">
               {children}
             </main>
-            
-            {/* AdSense Ad Unit - Place where you want ads to appear */}
             <div className="max-w-6xl mx-auto px-4 py-8 text-center">
-              <Script
+              <script
                 id="adsbygoogle-ad"
                 strategy="afterInteractive"
                 dangerouslySetInnerHTML={{
