@@ -15,11 +15,15 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
-        <meta name="google-adsense-account" content="ca-pub-3182066441920648"></meta>
-        {/* Google AdSense Auto Ads Script */}
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3182066441920648"
-     crossorigin="anonymous"></script>
-      </head>
+  {/* Use Next.js Script component instead of native script tag */}
+  <Script
+    id="adsbygoogle-init"
+    strategy="afterInteractive"
+    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3182066441920648"
+    crossOrigin="anonymous"
+  />
+  <meta name="google-adsense-account" content="ca-pub-3182066441920648"/>
+</head>
       <body className={inter.className}>
         <SupabaseProvider>
           <div className="min-h-screen bg-gray-50">
