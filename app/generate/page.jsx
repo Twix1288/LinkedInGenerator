@@ -67,7 +67,7 @@ export default function GeneratePage() {
     <div className="w-full max-w-3xl mx-auto px-4 py-8 min-h-[calc(100vh-160px)]">
       {/* AdSense Ad Unit - Placed at the top of the content */}
       <div className="mb-8 text-center">
-        <Script
+        <script
           id="adsbygoogle-ad"
           strategy="afterInteractive"
           dangerouslySetInnerHTML={{
