@@ -45,6 +45,12 @@ export default function RootLayout({ children }) {
                   >
                     About
                   </Link>
+                  <Link 
+                    href="/legal" 
+                    className="text-gray-600 hover:text-indigo-600 transition-colors"
+                  >
+                    Legal
+                  </Link>
                 </div>
               </div>
             </nav>

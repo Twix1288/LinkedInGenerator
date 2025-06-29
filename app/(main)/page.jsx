@@ -60,8 +60,7 @@ export default function Home() {
             <div className="bg-white p-6 rounded-lg shadow">
               <h3 className="text-xl font-semibold mb-3">Real User Results</h3>
               <p className="text-gray-600">
-                "Used LinkedGen for my consulting business and saw a 40% increase in profile 
-                views within 2 weeks." - Sarah K., Marketing Consultant
+                "Used GenZPost for my first linkedIn post and it gave me a great start into how to make posts" - Anonymous High School Student
               </p>
             </div>
           </div>

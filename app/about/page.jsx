@@ -19,8 +19,8 @@ export default function About() {
             <h3 className="text-xl font-medium">Rishit Agnihotri</h3>
             <p className="text-gray-600 mt-2">
               Full-stack developer with expertise in AI applications. Built GenZPost to solve 
-              his own challenges with consistent LinkedIn content creation. Previously worked 
-              at [Company Name] where he developed [Relevant Project].
+              his own challenges with consistent LinkedIn content creation. Currently heading 
+              into UCSC to work for a BS in Computer Science.
             </p>
           </div>
         </div>
