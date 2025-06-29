@@ -16,12 +16,8 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <head>
   {/* Use Next.js Script component instead of native script tag */}
-  <Script
-    id="adsbygoogle-init"
-    strategy="afterInteractive"
-    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3182066441920648"
-    crossOrigin="anonymous"
-  />
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3182066441920648"
+     crossorigin="anonymous"></script>
   <meta name="google-adsense-account" content="ca-pub-3182066441920648"/>
 </head>
       <body className={inter.className}>
