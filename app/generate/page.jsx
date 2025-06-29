@@ -63,13 +63,13 @@ export default function GeneratePage() {
   }
 
   return (
-    <div className="max-w-3xl mx-auto px-4 py-8">
-      <h1 className="text-2xl font-bold text-gray-900 mb-6">LinkedIn Post Generator</h1>
+    <div className="max-w-4xl mx-auto px-4 py-8 min-h-[calc(100vh-160px)]">
+      <h1 className="text-3xl font-bold text-gray-900 mb-8 text-center">LinkedIn Post Generator</h1>
       
-      <div className="space-y-6">
-        <div className="bg-white rounded-lg shadow p-6">
+      <div className="space-y-8">
+        <div className="bg-white rounded-xl shadow-lg p-8">
           {error && (
-            <div className="mb-4 p-4 bg-red-50 border-l-4 border-red-500 rounded">
+            <div className="mb-6 p-4 bg-red-50 border-l-4 border-red-500 rounded">
               <div className="flex items-center">
                 <svg className="h-5 w-5 text-red-500 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                   <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
@@ -89,7 +89,11 @@ export default function GeneratePage() {
           />
         </div>
 
-        {result && <PostResult post={result.post} metadata={result.metadata} />}
+        {result && (
+          <div className="bg-white rounded-xl shadow-lg p-8">
+            <PostResult post={result.post} metadata={result.metadata} />
+          </div>
+        )}
       </div>
     </div>
   )
