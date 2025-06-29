@@ -66,8 +66,8 @@ export default function GeneratePage() {
     <div className="max-w-4xl mx-auto px-4 py-8 min-h-[calc(100vh-160px)]">
       <h1 className="text-3xl font-bold text-gray-900 mb-8 text-center">LinkedIn Post Generator</h1>
       
-      <div className="space-y-8">
-        <div className="bg-white rounded-xl shadow-lg p-8">
+      <div className="space-y-8 w-full">
+        <div className="bg-white rounded-xl shadow-lg p-8 w-full">
           {error && (
             <div className="mb-6 p-4 bg-red-50 border-l-4 border-red-500 rounded">
               <div className="flex items-center">
@@ -90,7 +90,7 @@ export default function GeneratePage() {
         </div>
 
         {result && (
-          <div className="bg-white rounded-xl shadow-lg p-8">
+          <div className="bg-white rounded-xl shadow-lg p-8 w-full">
             <PostResult post={result.post} metadata={result.metadata} />
           </div>
         )}
