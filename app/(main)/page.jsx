@@ -1,9 +1,32 @@
 import Link from 'next/link'
-import Image from 'next/image'
+import Script from 'next/script'
 
 export default function Home() {
   return (
     <div className="min-h-screen bg-gray-50">
+      {/* AdSense Ad only on home page */}
+      <div className="text-center py-6">
+        <script
+          id="adsbygoogle-init"
+          strategy="afterInteractive"
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3182066441920648"
+          crossOrigin="anonymous"
+        />
+        <ins
+          className="adsbygoogle"
+          style={{ display: 'block' }}
+          data-ad-client="ca-pub-3182066441920648"
+          data-ad-slot="5702324134"
+          data-ad-format="auto"
+          data-full-width-responsive="true"
+        />
+        <script id="adsbygoogle-load" strategy="afterInteractive">
+  {`
+    (adsbygoogle = window.adsbygoogle || []).push({});
+  `}
+</script>
+      </div>
+
       {/* Hero Section */}
       <section className="py-20 px-4 max-w-6xl mx-auto text-center">
         <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
@@ -13,7 +36,7 @@ export default function Home() {
           AI-powered post generation to boost your professional presence. Used by marketers, 
           founders, and recruiters to save hours of writing time.
         </p>
-        <Link 
+        <Link
           href="/generate"
           className="inline-block px-8 py-4 bg-indigo-600 text-white rounded-lg text-lg font-medium hover:bg-indigo-700 transition-colors"
         >
@@ -70,7 +93,7 @@ export default function Home() {
       {/* CTA */}
       <section className="py-20 px-4 text-center">
         <h2 className="text-3xl font-bold mb-6">Ready to Elevate Your LinkedIn Game?</h2>
-        <Link 
+        <Link
           href="/generate"
           className="inline-block px-8 py-4 bg-indigo-600 text-white rounded-lg text-lg font-medium hover:bg-indigo-700 transition-colors"
         >
