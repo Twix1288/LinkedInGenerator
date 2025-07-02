@@ -1,32 +1,20 @@
 import Script from 'next/script'
+import dynamic from 'next/dynamic'
 
-export default function About() {
+const AdBlock = dynamic(() => import('./AdBlock'), { ssr: false })
+
+export const metadata = {
+  title: 'About GenZPost',
+  description: 'Learn about our AI-powered LinkedIn post generator',
+}
+
+export default function AboutPage() {
   return (
     <div className="max-w-4xl mx-auto my-8 p-6 bg-white rounded-lg shadow">
       <h1 className="text-3xl font-bold text-gray-900 mb-6">About GenZPost</h1>
 
-      {/* AdSense Ad only on about page */}
-      <div className="text-center mb-4">
-  <script
-    id="adsbygoogle-init"
-    strategy="afterInteractive"
-    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3182066441920648"
-    crossOrigin="anonymous"
-  />
-  <ins
-    className="adsbygoogle"
-    style={{ display: 'block' }}
-    data-ad-client="ca-pub-3182066441920648"
-    data-ad-slot="5702324134"
-    data-ad-format="auto"
-    data-full-width-responsive="true"
-  />
-  <script id="adsbygoogle-load" strategy="afterInteractive">
-    {`
-      (adsbygoogle = window.adsbygoogle || []).push({});
-    `}
-  </script>
-</div>
+      {/* Render AdSense on client only */}
+      <AdBlock />
 
       <div className="prose max-w-none">
         <p className="text-lg">

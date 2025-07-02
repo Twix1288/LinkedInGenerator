@@ -1,32 +1,14 @@
 import Link from 'next/link'
 import Script from 'next/script'
+import dynamic from 'next/dynamic'
+
+const AdBlock = dynamic(() => import('./AdBlock'), { ssr: false })
 
 export default function Home() {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* AdSense Ad only on home page */}
-      <div className="text-center py-6">
-        <script
-          id="adsbygoogle-init"
-          strategy="afterInteractive"
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3182066441920648"
-          crossOrigin="anonymous"
-        />
-        <ins
-          className="adsbygoogle"
-          style={{ display: 'block' }}
-          data-ad-client="ca-pub-3182066441920648"
-          data-ad-slot="5702324134"
-          data-ad-format="auto"
-          data-full-width-responsive="true"
-        />
-        <script id="adsbygoogle-load" strategy="afterInteractive">
-  {`
-    (adsbygoogle = window.adsbygoogle || []).push({});
-  `}
-</script>
-      </div>
-
+      <AdBlock />
       {/* Hero Section */}
       <section className="py-20 px-4 max-w-6xl mx-auto text-center">
         <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
