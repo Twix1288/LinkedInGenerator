@@ -1,25 +1,18 @@
 'use client'
 
-import Script from 'next/script'
+import { useEffect } from 'react'
 
 export default function AdBlock() {
-  // Function to push adsbygoogle after the script loads
-  const handleAdsLoad = () => {
+  useEffect(() => {
     try {
       (window.adsbygoogle = window.adsbygoogle || []).push({})
     } catch (e) {
       console.error('Adsbygoogle push error:', e)
     }
-  }
+  }, [])
 
   return (
     <div className="text-center mb-4">
-      <script
-        strategy="afterInteractive"
-        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3182066441920648"
-        crossOrigin="anonymous"
-        onLoad={handleAdsLoad}
-      />
       <ins
         className="adsbygoogle"
         style={{ display: 'block' }}
