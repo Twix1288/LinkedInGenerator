@@ -10,21 +10,6 @@ export const metadata = {
   title: 'GenZPost - LinkedIn Post Generator',
   description: 'Create viral LinkedIn posts with AI',
 }
-
-// This exports the <head> content for the whole app (Next.js App Router)
-export function Head() {
-  return (
-    <>
-      <meta name="google-adsense-account" content="ca-pub-3182066441920648" />
-      <script
-        async
-        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3182066441920648"
-        crossOrigin="anonymous"
-      />
-    </>
-  )
-}
-
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
