@@ -11,6 +11,7 @@ export default function Document() {
         {/* Google AdSense script - must be raw and server rendered */}
         <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3182066441920648"
      crossorigin="anonymous"></script>
+     <meta name="google-adsense-account" content="ca-pub-3182066441920648"></meta>
       </Head>
       <body>
         <Main />
