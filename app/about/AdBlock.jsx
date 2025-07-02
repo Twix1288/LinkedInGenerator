@@ -14,7 +14,7 @@ export default function AdBlock() {
 
   return (
     <div className="text-center mb-4">
-      <Script
+      <script
         strategy="afterInteractive"
         src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3182066441920648"
         crossOrigin="anonymous"
