@@ -13,6 +13,19 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
+      <head>
+        {/* Verification meta for AdSense */}
+        <meta
+          name="google-adsense-account"
+          content="ca-pub-3182066441920648"
+        />
+        {/* Core AdSense script load */}
+        <Script
+          strategy="beforeInteractive"
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3182066441920648"
+          crossOrigin="anonymous"
+        />
+      </head>
       <body className={inter.className}>
         <SupabaseProvider>
           <div className="min-h-screen bg-gray-50">
