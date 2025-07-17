@@ -1,95 +1,89 @@
 import dynamic from 'next/dynamic'
 
-const AdBlock = dynamic(() => import('./AdBlock'), { ssr: false })
+const AdBlock = dynamic(() => import('../AdBlock'), { ssr: false })
 
 export const metadata = {
   title: 'About GenZPost',
-  description: 'Discover how GenZPost uses cutting-edge AI to help professionals craft impactful LinkedIn posts easily.',
+  description: 'Learn about our AI-powered LinkedIn post generator',
 }
 
 export default function AboutPage() {
   return (
-    <main className="max-w-4xl mx-auto my-12 p-8 bg-white rounded-lg shadow-lg prose prose-indigo prose-lg">
-      <h1 className="text-4xl font-bold mb-8">About GenZPost</h1>
+    <div className="max-w-4xl mx-auto my-8 p-6 bg-white rounded-lg shadow">
+      <h1 className="text-3xl font-bold text-gray-900 mb-6">About GenZPost</h1>
 
+      {/* Render AdSense on client only */}
       <AdBlock />
 
-      <section>
-        <p>
-          GenZPost empowers professionals, students, founders, and marketers by transforming
-          their raw ideas into polished, engaging LinkedIn posts in seconds — no writing
-          expertise required. Using advanced AI technology, we democratize content creation,
-          helping you amplify your professional brand with ease and confidence.
+      <div className="prose max-w-none">
+        <p className="text-lg leading-relaxed">
+          GenZPost helps professionals create engaging LinkedIn posts in seconds using
+          advanced AI technology. Our mission is to democratize high-quality content
+          creation for everyone, empowering users to build their personal brand with ease and confidence.
         </p>
-        <p>
-          Whether you’re sharing accomplishments, insights, or company updates, GenZPost
-          delivers tailored posts optimized for LinkedIn engagement.
-        </p>
-      </section>
 
-      <section className="mt-12">
-        <h2 className="text-3xl font-semibold mb-6">Meet Our Founder</h2>
-        <div className="flex flex-col md:flex-row items-start gap-8">
-          <div className="w-36 h-36 bg-gray-200 rounded-full mx-auto md:mx-0 flex-shrink-0">
-            {/* Replace with actual founder photo */}
+        <h2 className="text-2xl font-semibold mt-8 mb-4">Our Founder</h2>
+        <div className="flex flex-col md:flex-row gap-6 items-start mb-8">
+          <div className="w-full md:w-1/4">
+            <img
+              src="/images/rishit-profile.jpg"
+              alt="Rishit Agnihotri"
+              className="rounded-full w-32 h-32 mx-auto md:mx-0 object-cover"
+            />
           </div>
-          <div>
-            <h3 className="text-2xl font-medium">Rishit Agnihotri</h3>
-            <p className="mt-3 text-gray-700 leading-relaxed">
-              Rishit is a passionate full-stack developer and AI enthusiast who created GenZPost
-              to overcome his own challenges with consistent content creation on LinkedIn.
-              Currently pursuing a Bachelor of Science in Computer Science at UCSC, he
-              combines deep technical expertise with a vision to help others build authentic
-              professional voices effortlessly.
+          <div className="w-full md:w-3/4">
+            <h3 className="text-xl font-medium">Rishit Agnihotri</h3>
+            <p className="text-gray-600 mt-2 leading-relaxed">
+              Full-stack developer with expertise in AI applications. Built GenZPost to solve
+              his own challenges with consistent LinkedIn content creation. Currently pursuing
+              a BS in Computer Science at UCSC, Rishit combines technical skill and creative vision
+              to help others succeed.
             </p>
-            <p className="mt-2 text-gray-600 italic text-sm">
-              Connect with Rishit on LinkedIn to follow the journey and latest updates.
+            <p className="mt-3">
+              Connect with Rishit on{' '}
+              <a
+                href="https://www.linkedin.com/in/rishitagnihotri"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-indigo-600 hover:underline"
+              >
+                LinkedIn
+              </a>
+              .
             </p>
           </div>
         </div>
-      </section>
 
-      <section className="mt-12">
-        <h2 className="text-3xl font-semibold mb-6">How GenZPost Works</h2>
-        <ol className="list-decimal pl-6 space-y-4 text-gray-700">
-          <li>
-            <strong>Input Your Ideas:</strong> Start by sharing bullet points, key accomplishments,
-            or thoughts you'd like to express.
-          </li>
-          <li>
-            <strong>Customize Your Post:</strong> Optionally add images or links to enrich your post,
-            and choose your tone — professional, casual, or inspirational.
-          </li>
-          <li>
-            <strong>Generate AI-Powered Content:</strong> Our AI crafts a polished LinkedIn post
-            that reflects your voice and goals.
-          </li>
-          <li>
-            <strong>Review and Share:</strong> Preview the result, make edits if needed, then post
-            it directly to LinkedIn or save it for later.
-          </li>
+        <h2 className="text-2xl font-semibold mt-8 mb-4">How It Works</h2>
+        <ol className="list-decimal pl-5 space-y-3">
+          <li className="font-medium">Enter your bullet points or key ideas</li>
+          <li className="font-medium">Add images/links (optional)</li>
+          <li className="font-medium">Select your preferred tone and style</li>
+          <li className="font-medium">Receive a polished, ready-to-post LinkedIn update</li>
         </ol>
-      </section>
 
-      <section className="mt-12">
-        <h2 className="text-3xl font-semibold mb-6">Our Technology Stack</h2>
-        <ul className="list-disc pl-6 space-y-3 text-gray-700">
-          <li><strong>GPT-4:</strong> State-of-the-art natural language processing for human-like content.</li>
-          <li><strong>Next.js:</strong> Fast, SEO-friendly framework for optimal user experience.</li>
-          <li><strong>Supabase:</strong> Secure and scalable backend for data and authentication.</li>
-          <li><strong>Tailwind CSS:</strong> Modern, responsive UI styling framework.</li>
-          <li><strong>Google AdSense:</strong> Supports platform growth while maintaining UX.</li>
+        <h2 className="text-2xl font-semibold mt-8 mb-4">Our Technology</h2>
+        <ul className="list-disc pl-5 space-y-2">
+          <li>GPT-4 for natural language generation</li>
+          <li>Next.js for blazing fast performance</li>
+          <li>Supabase for secure data storage</li>
+          <li>Tailwind CSS for beautiful and responsive UI</li>
         </ul>
-      </section>
 
-      <section className="mt-12 text-center">
-        <h2 className="text-3xl font-semibold mb-6">Join Thousands Elevating Their LinkedIn Presence</h2>
-        <p className="max-w-xl mx-auto text-gray-600 leading-relaxed">
-          Whether you want to impress recruiters, share your startup journey, or grow your
-          professional network, GenZPost makes it effortless to communicate confidently.
-          Experience how AI can elevate your personal brand — starting today.
+        <h2 className="text-2xl font-semibold mt-8 mb-4">Learn More</h2>
+        <p>
+          For insights on AI in content creation, see this{' '}
+          <a
+            href="https://www.linkedin.com/pulse/how-ai-changing-linkedin-content-creation-john-doe/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-indigo-600 hover:underline"
+          >
+            expert article
+          </a>{' '}
+          about how AI is transforming LinkedIn posts and digital branding.
         </p>
-      </section>
-    </main>
+      </div>
+    </div>
   )
 }
