@@ -1,7 +1,5 @@
 'use client'
-
 import { useState, useEffect } from 'react'
-import Script from 'next/script'
 import GenerationForm from '../../components/GenerationForm'
 import PostResult from '../../components/PostResult'
 import dynamic from 'next/dynamic'
@@ -52,57 +50,58 @@ export default function GeneratePage() {
 
       setResult(data)
       setRemainingGenerations(prev => Math.max(0, prev - 1))
-
     } catch (err) {
-      setError({
-        title: err.message,
-        details: 'Please try again later'
-      })
+      setError({ title: err.message, details: 'Please try again later' })
     } finally {
       setIsGenerating(false)
     }
   }
 
   return (
-    <div className="w-full max-w-3xl mx-auto px-4 py-8 min-h-[calc(100vh-160px)]">
+    <main className="max-w-3xl mx-auto px-4 py-8 min-h-[calc(100vh-160px)] prose prose-indigo">
       <h1 className="text-3xl font-bold text-gray-900 mb-8 text-center">LinkedIn Post Generator</h1>
 
-      {/* AdSense */}
-      <AdBlock />
-      {/* Static Content for Google */}
+      {/* Explanation and Examples */}
       <section className="bg-white rounded-lg shadow p-6 mb-8">
-        <h2 className="text-2xl font-semibold text-indigo-700 mb-2">How GenZPost Works</h2>
+        <h2 className="text-2xl font-semibold text-indigo-700 mb-4">How It Works</h2>
         <p className="text-gray-700 mb-4">
-          GenZPost helps you turn your bullet points into viral-ready LinkedIn posts using AI.
+          GenZPost uses AI to transform your ideas into compelling LinkedIn posts that engage your audience.
         </p>
-        <ul className="list-disc pl-5 text-gray-600">
-          <li>Write your 3–5 key ideas</li>
-          <li>Choose a tone (e.g., professional or casual)</li>
-          <li>Hit generate and post!</li>
+        <ul className="list-disc pl-6 text-gray-600 mb-6">
+          <li>Write your key ideas or bullet points</li>
+          <li>Select a tone (professional, casual, inspirational)</li>
+          <li>Click generate — and get your post instantly!</li>
         </ul>
+
+        <h3 className="text-xl font-bold text-gray-800 mb-3">Example Posts:</h3>
+        <div className="bg-gray-50 p-4 rounded mb-2">🚀 Excited to share I’ve accepted an internship at Microsoft this summer! #growth #cs</div>
+        <div className="bg-gray-50 p-4 rounded mb-2">From zero to 1,000+ impressions on my first post with GenZPost. Game-changing. 🙌</div>
+        <div className="bg-gray-50 p-4 rounded mb-2">College taught me Java. GenZPost taught me how to connect with real people. 💡</div>
       </section>
 
-      {/* Generator */}
-      <div className="bg-white rounded-xl shadow-lg p-8 w-full">
+      <AdBlock />
+
+      {/* Generator Form */}
+      <section className="bg-white rounded-xl shadow-lg p-8 w-full">
         {error && (
           <div className="mb-6 p-4 bg-red-50 border-l-4 border-red-500 rounded">
             <h3 className="text-sm font-medium text-red-800">{error.title}</h3>
             <p className="text-sm text-red-700 mt-1">{error.details}</p>
           </div>
         )}
-
         <GenerationForm
           onSubmit={handleGenerate}
           isGenerating={isGenerating}
           remainingGenerations={remainingGenerations}
         />
-      </div>
+      </section>
 
+      {/* Post Result */}
       {result && (
-        <div className="bg-white rounded-xl shadow-lg p-8 w-full mt-8">
+        <section className="bg-white rounded-xl shadow-lg p-8 w-full mt-8">
           <PostResult post={result.post} metadata={result.metadata} />
-        </div>
+        </section>
       )}
-    </div>
+    </main>
   )
 }
