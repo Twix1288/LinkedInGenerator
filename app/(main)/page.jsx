@@ -86,7 +86,7 @@ export default function Home() {
                 "Used GenZPost for my first LinkedIn post and it gave me a great start into how to make posts." – Anonymous High School Student
               </p>
               <p className="mt-4 italic text-gray-500">
-                “The posts generated helped me triple my profile views in weeks.” – Sarah L., Marketing Manager
+                “The posts generated helped me triple my profile views in weeks.” – User
               </p>
             </div>
           </div>
