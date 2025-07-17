@@ -1,5 +1,4 @@
 'use client'
-
 import { useState, useEffect } from 'react'
 import GenerationForm from '../../components/GenerationForm'
 import PostResult from '../../components/PostResult'
@@ -26,7 +25,7 @@ export default function GeneratePage() {
       const response = await fetch('/api/check-limit', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ clientId: id }),
+        body: JSON.stringify({ clientId: id })
       })
       const data = await response.json()
       setRemainingGenerations(data.remaining)
@@ -43,14 +42,14 @@ export default function GeneratePage() {
       const response = await fetch('/api/generate', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...formData, clientId }),
+        body: JSON.stringify({ ...formData, clientId })
       })
 
       const data = await response.json()
       if (!response.ok) throw new Error(data.error || 'API request failed')
 
       setResult(data)
-      setRemainingGenerations((prev) => Math.max(0, prev - 1))
+      setRemainingGenerations(prev => Math.max(0, prev - 1))
     } catch (err) {
       setError({ title: err.message, details: 'Please try again later' })
     } finally {
@@ -65,9 +64,8 @@ export default function GeneratePage() {
       {/* Static content for SEO and users */}
       <section className="bg-white rounded-lg shadow p-6 mb-8">
         <h2 className="text-2xl font-semibold text-indigo-700 mb-4">How It Works</h2>
-        <p className="text-gray-700 mb-2 leading-relaxed">
+        <p className="text-gray-700 mb-2">
           GenZPost uses AI to turn your thoughts into high-impact LinkedIn posts in seconds.
-          Use the form below to enter your key points and choose your preferred tone.
         </p>
         <ul className="list-disc pl-6 text-gray-600">
           <li>Write your key ideas or bullet points</li>
@@ -76,15 +74,9 @@ export default function GeneratePage() {
         </ul>
 
         <h3 className="text-xl font-bold text-gray-800 mt-6 mb-2">Example Posts:</h3>
-        <div className="bg-gray-50 p-4 rounded mb-2 leading-snug">
-          🚀 Excited to share I’ve accepted an internship at Microsoft this summer! #growth #cs
-        </div>
-        <div className="bg-gray-50 p-4 rounded mb-2 leading-snug">
-          From zero to 1,000+ impressions on my first post with GenZPost. Game-changing. 🙌
-        </div>
-        <div className="bg-gray-50 p-4 rounded mb-2 leading-snug">
-          College taught me Java. GenZPost taught me how to connect with real people. 💡
-        </div>
+        <div className="bg-gray-50 p-4 rounded mb-2">🚀 Excited to share I’ve accepted an internship at Microsoft this summer! #growth #cs</div>
+        <div className="bg-gray-50 p-4 rounded mb-2">From zero to 1,000+ impressions on my first post with GenZPost. Game-changing. 🙌</div>
+        <div className="bg-gray-50 p-4 rounded mb-2">College taught me Java. GenZPost taught me how to connect with real people. 💡</div>
       </section>
 
       {/* AdSense only shown after content */}
@@ -110,7 +102,33 @@ export default function GeneratePage() {
           <PostResult post={result.post} metadata={result.metadata} />
         </div>
       )}
+
+      {/* FAQ Section */}
+      <section className="max-w-3xl mx-auto mt-12 bg-white rounded-lg shadow p-6">
+        <h2 className="text-2xl font-bold mb-4 text-indigo-700">Frequently Asked Questions</h2>
+        <dl className="space-y-4 text-gray-700">
+          <div>
+            <dt className="font-semibold">What is GenZPost?</dt>
+            <dd>GenZPost is an AI-powered tool that helps you create engaging LinkedIn posts quickly by turning your ideas into polished content.</dd>
+          </div>
+          <div>
+            <dt className="font-semibold">How does the AI generate posts?</dt>
+            <dd>We use advanced GPT-4 natural language processing to understand your input and generate professional, casual, or inspirational posts tailored to your tone choice.</dd>
+          </div>
+          <div>
+            <dt className="font-semibold">Is there a limit to how many posts I can generate?</dt>
+            <dd>Yes, we currently allow 3 free post generations per user. You can check your remaining quota on the generator page.</dd>
+          </div>
+          <div>
+            <dt className="font-semibold">Can I add images or links to my posts?</dt>
+            <dd>You can add links or image URLs in your input, and our AI will incorporate them naturally into your post.</dd>
+          </div>
+          <div>
+            <dt className="font-semibold">Is my data safe?</dt>
+            <dd>Absolutely. We use Supabase for secure data storage and follow best practices to keep your information private.</dd>
+          </div>
+        </dl>
+      </section>
     </div>
-    //EDit
   )
 }
