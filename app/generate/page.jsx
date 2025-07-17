@@ -5,7 +5,7 @@ import GenerationForm from '../../components/GenerationForm'
 import PostResult from '../../components/PostResult'
 import dynamic from 'next/dynamic'
 
-const AdBlock = dynamic(() => import('../AdBlock'), { ssr: false })
+const AdBlock = dynamic(() => import('./AdBlock'), { ssr: false })
 
 export default function GeneratePage() {
   const [result, setResult] = useState(null)

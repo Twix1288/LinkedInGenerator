@@ -1,6 +1,6 @@
 import dynamic from 'next/dynamic'
 
-const AdBlock = dynamic(() => import('../AdBlock'), { ssr: false })
+const AdBlock = dynamic(() => import('./AdBlock'), { ssr: false })
 
 export const metadata = {
   title: 'About GenZPost',
