@@ -42,7 +42,7 @@ export default function AboutPage() {
             <p className="mt-3">
               Connect with Rishit on{' '}
               <a
-                href="https://www.linkedin.com/in/rishitagnihotri"
+                href="www.linkedin.com/in/rishit-agnihotri-b3096b152"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-indigo-600 hover:underline"
