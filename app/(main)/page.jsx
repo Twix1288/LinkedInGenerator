@@ -1,12 +1,8 @@
 import Link from 'next/link'
+import Script from 'next/script'
 import dynamic from 'next/dynamic'
 
 const AdBlock = dynamic(() => import('./AdBlock'), { ssr: false })
-
-export const metadata = {
-  title: 'GenZPost - LinkedIn Post Generator',
-  description: 'Create viral LinkedIn posts using AI. Perfect for Gen Z, founders, and professionals.',
-}
 
 export default function Home() {
   return (
@@ -19,7 +15,7 @@ export default function Home() {
         <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
           Craft Perfect LinkedIn Posts in Seconds
         </h1>
-        <p className="text-xl text-gray-600 mb-10 max-w-3xl mx-auto leading-relaxed">
+        <p className="text-xl text-gray-600 mb-10 max-w-3xl mx-auto">
           AI-powered post generation to boost your professional presence. Used by marketers, 
           founders, and recruiters to save hours of writing time.
         </p>
@@ -36,26 +32,20 @@ export default function Home() {
         <div className="max-w-6xl mx-auto px-4">
           <h2 className="text-3xl font-bold text-center mb-12">How It Works</h2>
           <div className="grid md:grid-cols-3 gap-8">
-            <div className="bg-gray-50 p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow">
-              <div className="text-indigo-600 text-3xl font-bold mb-4">1</div>
+            <div className="bg-gray-50 p-6 rounded-lg">
+              <div className="text-indigo-600 text-2xl mb-4">1</div>
               <h3 className="text-xl font-semibold mb-2">Enter Your Content</h3>
-              <p className="text-gray-600 leading-relaxed">
-                Share your bullet points or ideas quickly and easily.
-              </p>
+              <p className="text-gray-600">Share your bullet points or ideas</p>
             </div>
-            <div className="bg-gray-50 p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow">
-              <div className="text-indigo-600 text-3xl font-bold mb-4">2</div>
+            <div className="bg-gray-50 p-6 rounded-lg">
+              <div className="text-indigo-600 text-2xl mb-4">2</div>
               <h3 className="text-xl font-semibold mb-2">Choose Your Tone</h3>
-              <p className="text-gray-600 leading-relaxed">
-                Select from professional, casual, inspirational, or customize your style.
-              </p>
+              <p className="text-gray-600">Professional, Casual, or Inspirational</p>
             </div>
-            <div className="bg-gray-50 p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow">
-              <div className="text-indigo-600 text-3xl font-bold mb-4">3</div>
+            <div className="bg-gray-50 p-6 rounded-lg">
+              <div className="text-indigo-600 text-2xl mb-4">3</div>
               <h3 className="text-xl font-semibold mb-2">Get AI-Powered Post</h3>
-              <p className="text-gray-600 leading-relaxed">
-                Receive a polished, ready-to-share LinkedIn update that drives engagement.
-              </p>
+              <p className="text-gray-600">Ready-to-share LinkedIn content</p>
             </div>
           </div>
         </div>
@@ -66,54 +56,59 @@ export default function Home() {
         <div className="max-w-6xl mx-auto px-4">
           <h2 className="text-3xl font-bold text-center mb-8">Why Professionals Choose Us</h2>
           <div className="grid md:grid-cols-2 gap-8">
-            <div className="bg-white p-6 rounded-lg shadow hover:shadow-lg transition-shadow">
+            <div className="bg-white p-6 rounded-lg shadow">
               <h3 className="text-xl font-semibold mb-3">AI-Trained on Top Performers</h3>
-              <p className="text-gray-600 leading-relaxed">
-                Our AI analyzes thousands of high-engagement LinkedIn posts to deliver proven frameworks that get 3x more impressions than average content.
+              <p className="text-gray-600">
+                Our model analyzes thousands of high-engagement LinkedIn posts to deliver 
+                proven frameworks that get 3x more impressions than average content.
               </p>
-              <a
-                href="https://www.linkedin.com/pulse/how-ai-changing-linkedin-content-creation-john-doe/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mt-3 inline-block text-indigo-600 hover:underline font-semibold"
-              >
-                Learn more about AI and LinkedIn
-              </a>
             </div>
-            <div className="bg-white p-6 rounded-lg shadow hover:shadow-lg transition-shadow">
+            <div className="bg-white p-6 rounded-lg shadow">
               <h3 className="text-xl font-semibold mb-3">Real User Results</h3>
-              <p className="text-gray-600 leading-relaxed">
-                "Used GenZPost for my first LinkedIn post and it gave me a great start into how to make posts." – Anonymous High School Student
-              </p>
-              <p className="mt-4 italic text-gray-500">
-                “The posts generated helped me triple my profile views in weeks.” – User
+              <p className="text-gray-600">
+                "Used GenZPost for my first linkedIn post and it gave me a great start into how to make posts" - Anonymous High School Student
               </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Call to Action */}
-      <section className="py-20 px-4 text-center bg-white">
+      {/* CTA */}
+      <section className="py-20 px-4 text-center">
         <h2 className="text-3xl font-bold mb-6">Ready to Elevate Your LinkedIn Game?</h2>
-        <p className="text-gray-700 max-w-2xl mx-auto mb-8 leading-relaxed">
-          Whether you're a student, founder, recruiter, or marketer, GenZPost makes professional content creation effortless and effective.
-        </p>
         <Link
           href="/generate"
-          className="inline-block px-10 py-4 bg-indigo-600 text-white rounded-lg text-lg font-semibold hover:bg-indigo-700 transition-colors"
+          className="inline-block px-8 py-4 bg-indigo-600 text-white rounded-lg text-lg font-medium hover:bg-indigo-700 transition-colors"
         >
-          Try It Now – Free
+          Try It Now - Free
         </Link>
       </section>
 
-      {/* Footer-like Navigation Links for SEO */}
-      <section className="py-10 bg-gray-50 text-center text-sm text-gray-500">
-        <p>
-          Explore more: {' '}
-          <Link href="/about" className="hover:underline text-indigo-600">About</Link>
-          <Link href="/legal" className="hover:underline text-indigo-600">Legal</Link>
-        </p>
+      {/* FAQ Section */}
+      <section className="max-w-6xl mx-auto mt-12 bg-white rounded-lg shadow p-6">
+        <h2 className="text-2xl font-bold mb-4 text-indigo-700">Frequently Asked Questions</h2>
+        <dl className="space-y-4 text-gray-700 max-w-4xl mx-auto">
+          <div>
+            <dt className="font-semibold">What is GenZPost?</dt>
+            <dd>GenZPost is an AI-powered tool that helps you create engaging LinkedIn posts quickly by turning your ideas into polished content.</dd>
+          </div>
+          <div>
+            <dt className="font-semibold">How does the AI generate posts?</dt>
+            <dd>We use advanced GPT-4 natural language processing to understand your input and generate professional, casual, or inspirational posts tailored to your tone choice.</dd>
+          </div>
+          <div>
+            <dt className="font-semibold">Is there a limit to how many posts I can generate?</dt>
+            <dd>Yes, we currently allow 3 free post generations per user. You can check your remaining quota on the generator page.</dd>
+          </div>
+          <div>
+            <dt className="font-semibold">Can I add images or links to my posts?</dt>
+            <dd>You can add links or image URLs in your input, and our AI will incorporate them naturally into your post.</dd>
+          </div>
+          <div>
+            <dt className="font-semibold">Is my data safe?</dt>
+            <dd>Absolutely. We use Supabase for secure data storage and follow best practices to keep your information private.</dd>
+          </div>
+        </dl>
       </section>
     </div>
   )
