@@ -14,7 +14,6 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
-        {/* Google AdSense verification */}
         <meta name="google-adsense-account" content="ca-pub-3182066441920648" />
         <script
           async
@@ -24,8 +23,8 @@ export default function RootLayout({ children }) {
       </head>
       <body className={inter.className}>
         <SupabaseProvider>
-          <div className="min-h-screen bg-gray-50">
-            <nav className="bg-white shadow-sm">
+          <div className="min-h-screen bg-gray-50 flex flex-col">
+            <nav className="bg-white shadow-sm sticky top-0 z-50">
               <div className="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
                 <Link href="/" className="text-xl font-bold text-indigo-600 hover:text-indigo-800">
                   GenZPost
@@ -43,13 +42,15 @@ export default function RootLayout({ children }) {
                 </div>
               </div>
             </nav>
-            <main className="max-w-6xl mx-auto px-4 py-8">{children}</main>
+
+            <main className="flex-grow max-w-6xl mx-auto px-4 py-8 w-full">{children}</main>
+
             <footer className="bg-white border-t mt-10">
-              <div className="max-w-6xl mx-auto px-4 py-6 flex justify-between text-sm text-gray-500">
+              <div className="max-w-6xl mx-auto px-4 py-6 flex flex-col md:flex-row justify-between text-sm text-gray-500">
                 <div>&copy; {new Date().getFullYear()} GenZPost</div>
-                <div className="space-x-4">
-                  <Link href="/about">About</Link>
-                  <Link href="/legal">Legal</Link>
+                <div className="space-x-4 mt-2 md:mt-0">
+                  <Link href="/about" className="hover:underline">About</Link>
+                  <Link href="/legal" className="hover:underline">Legal</Link>
                 </div>
               </div>
             </footer>
