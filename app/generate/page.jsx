@@ -5,8 +5,6 @@ import GenerationForm from '../../components/GenerationForm'
 import PostResult from '../../components/PostResult'
 import dynamic from 'next/dynamic'
 
-const AdBlock = dynamic(() => import('../generate/AdBlock'), { ssr: false })
-
 export default function GeneratePage() {
   const [result, setResult] = useState(null)
   const [isGenerating, setIsGenerating] = useState(false)
@@ -77,9 +75,6 @@ export default function GeneratePage() {
         <div className="bg-gray-50 p-4 rounded mb-2">From zero to 1,000+ impressions on my first post with GenZPost. Game-changing. 🙌</div>
         <div className="bg-gray-50 p-4 rounded mb-2">College taught me Java. GenZPost taught me how to connect with real people. 💡</div>
       </section>
-
-      {/* Ad after meaningful content */}
-      <AdBlock />
 
       {/* Generator form */}
       <div className="bg-white rounded-xl shadow-lg p-8 w-full mt-8">
